@@ -12,8 +12,8 @@ if __name__=='__main__':
             n=int(input('Intoduzca el numero: '))
             
         except Exception as error:
-            print('Ese no es un número')
             os.system('clear')
+            print('Ese no es un número')
             continue
 
         if n==num:
