@@ -70,6 +70,7 @@ class Lista:
 
 
 while True:
+    
     print('Bienvenido a su sistema de gestion de tareas\nSeleccione una opción:')
     print('1-Agregar una tarea')
     print('2-Mostrar tareas')
@@ -85,4 +86,5 @@ while True:
     match op:
         case 1:
             txt=input("Texto de la tarea: ")
+            
             
