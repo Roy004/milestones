@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import random
+import sys
 
 
 class Tarea:
@@ -61,6 +62,15 @@ class Lista:
         except json.JSONDecodeError:
             return[]
         
+    @staticmethod
+    def obt_cant_tareas():
+        try:
+            with open('tareas.json','r') as f:
+                lista=json.load(f)
+                return len(lista)
+        except json.JSONDecodeError:
+            return 0
+        
 
 # Lista.limpiar_tareas()
 
@@ -70,21 +80,35 @@ class Lista:
 
 
 while True:
-    
+    cant=Lista.obt_cant_tareas()
+
     print('Bienvenido a su sistema de gestion de tareas\nSeleccione una opción:')
     print('1-Agregar una tarea')
     print('2-Mostrar tareas')
     print('3-Seleccionar una tarea')
     print('4-Marcar una tarea como completada')
+    print('0-Salir de la app')
 
     try:
         op=int(input('Escriba su opcion: '))
     except ValueError:
-        print('Introduzca solo el numero de la opcion deseada!')
+        print('Introduzca solo el número de la opcion deseada!')
         continue
 
-    match op:
-        case 1:
-            txt=input("Texto de la tarea: ")
-            
-            
+    if op == 0:
+        sys.exit()
+    elif op == 1:
+        txt = input('Tarea: ')
+        prioridad_in = input('Prioridad (A-Alta, M-Media, B-Baja): ')
+        tarea=Tarea(txt, cant, prioridad = prioridad_in)
+        Lista.guardar_tarea(tarea)
+    elif op == 2:
+        for i in range(cant):
+            t=Lista.selec_tarea(i)
+            print(t)
+        #Para continuar:
+        cont=input('Desea continuar (s/n): ')
+        if cont == 's':
+            continue
+        elif cont == 'n':
+            sys.exit()
