@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import pprint
 import random
 import sys
 
@@ -52,16 +53,33 @@ class Lista:
             json.dump([],f,indent=4)
 
     @staticmethod
+    def _encontrar_dic_bin(lista: list[dict], id: int):
+        mitad=len(lista)/2
+        if lista[id]['id'] < id:
+            return Lista._encontrar_dic_bin(lista[mitad:], id)
+        elif lista[id]['id'] > id:
+            return Lista._encontrar_dic_bin(lista[:mitad],id)
+        else:
+            return lista[id]
+
+    @staticmethod
     def selec_tarea(id:int):
         try:
             with open(Lista.NOMBRE_ARCHIVO, "r") as f:
                 datos=json.load(f)
-                for dato in datos:
-                    if dato['id'] == id:
-                        return dato
+                dic=Lista._encontrar_dic_bin(datos, id)
         except json.JSONDecodeError:
-            return[]
-        
+            return {}
+        return {}
+    
+    @staticmethod
+    def obtener_tareas():
+        try:
+            with open('tareas.json','r') as f:
+                return json.load(f)
+        except:
+            return []
+    
     @staticmethod
     def obt_cant_tareas():
         try:
@@ -103,9 +121,9 @@ while True:
         tarea=Tarea(txt, cant, prioridad = prioridad_in)
         Lista.guardar_tarea(tarea)
     elif op == 2:
-        for i in range(cant):
-            t=Lista.selec_tarea(i)
-            print(t)
+        lista=Lista.obtener_tareas()
+        pprint.pprint(lista)
+
         #Para continuar:
         cont=input('Desea continuar (s/n): ')
         if cont == 's':
