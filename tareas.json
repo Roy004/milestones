@@ -12,5 +12,12 @@
         "completada": false,
         "prioridad": "A",
         "fecha_creacion": "2025-11-02T10:28:47.642645"
+    },
+    {
+        "texto": "Escribir un diario",
+        "id": 2,
+        "completada": false,
+        "prioridad": "A",
+        "fecha_creacion": "2025-11-03T12:06:47.572078"
     }
 ]

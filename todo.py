@@ -122,7 +122,8 @@ while True:
         Lista.guardar_tarea(tarea)
     elif op == 2:
         lista=Lista.obtener_tareas()
-        pprint.pprint(lista)
+        for d in lista:
+            pprint.pprint(d)
 
         #Para continuar:
         cont=input('Desea continuar (s/n): ')
@@ -130,3 +131,9 @@ while True:
             continue
         elif cont == 'n':
             sys.exit()
+    elif op == 3:
+        input('Proximamente ...(Enter para continuar)')
+        continue
+    elif op==4:
+        input('Proximamente ...(Enter para continuar)')
+        continue
